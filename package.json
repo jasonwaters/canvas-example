@@ -6,19 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "PRODUCTION=1 ./node_modules/.bin/webpack",
-    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./"
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./ --port 8888"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonwaters/canvas-example"
   },
   "author": "Jason Waters",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "babel-core": "latest",
-    "babel-loader": "latest",
-    "css-loader": "latest",
-    "file-loader": "latest",
-    "style-loader": "latest",
-    "webpack": "latest",
-    "webpack-dev-server": "latest"
+    "babel-core": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.16.0",
+    "file-loader": "^0.8.4",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.10.1"
   }
 }
