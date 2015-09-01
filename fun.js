@@ -30,12 +30,11 @@ function getRandom(range) {
 function Ball() {
     this.radius = (Math.random() * 10) + 2;
 
-    this.x = Math.random() * (STAGE_WIDTH-this.radius*2);
-    this.y = Math.random() * (STAGE_HEIGHT-this.radius*2);
+    this.x = Math.floor(Math.random() * (STAGE_WIDTH-this.radius*2));
+    this.y = Math.floor(Math.random() * (STAGE_HEIGHT-this.radius*2));
 
     this.xVel = getRandom(4);
     this.yVel = getRandom(4);
-
 
     this.color = '#'+Math.floor(Math.random()*16777215).toString(16);
 }
@@ -67,7 +66,7 @@ Ball.prototype.render = function() {
 
 
 var actors = [];
-for(var i=0;i<50;i++) {
+for(var i=0;i<100;i++) {
     actors.push(new Ball());
 }
 
