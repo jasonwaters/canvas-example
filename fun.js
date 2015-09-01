@@ -28,7 +28,7 @@ function getRandom(range) {
 }
 
 function Ball() {
-    this.radius = (Math.random() * 50) + 2;
+    this.radius = (Math.random() * 10) + 2;
 
     this.x = Math.random() * (STAGE_WIDTH-this.radius*2);
     this.y = Math.random() * (STAGE_HEIGHT-this.radius*2);
