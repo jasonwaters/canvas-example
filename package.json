@@ -1,0 +1,24 @@
+{
+  "name": "canvas-example",
+  "version": "1.0.0",
+  "description": "Simple Canvas app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "PRODUCTION=1 ./node_modules/.bin/webpack",
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./"
+  },
+  "author": "Jason Waters",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "css-loader": "latest",
+    "file-loader": "latest",
+    "style-loader": "latest",
+    "webpack": "latest",
+    "webpack-dev-server": "latest"
+  }
+}
