@@ -1,12 +1,17 @@
 'use strict';
 
+var random = require('lodash/number/random');
+var randomNegative = require('./utils/randomNegative');
+var randomHexColor = require('./utils/randomHexColor');
+
 var canvas = document.getElementById('mycanvas');
 var ctx = canvas.getContext('2d');
+
 var STAGE_WIDTH = canvas.width,
     STAGE_HEIGHT = canvas.height;
 
 function clear() {
-    ctx.clearRect(0,0,STAGE_WIDTH, STAGE_HEIGHT);
+    ctx.clearRect(0, 0, STAGE_WIDTH, STAGE_HEIGHT);
 }
 
 function drawCircle(x, y, r, color) {
@@ -21,69 +26,61 @@ function drawCircle(x, y, r, color) {
     ctx.fill();
 }
 
-function getRandom(range) {
-    var num = Math.floor(Math.random()*range) + 1; // this will get a number between 1 and range;
-    num *= Math.floor(Math.random()*2) == 1 ? 1 : -1; // this will add minus sign in 50% of cases
-    return num;
-}
-
 function Ball() {
-    this.radius = (Math.random() * 10) + 2;
+    this.radius = random(10, 50);
+    this.diameter = this.radius * 2;
 
-    this.x = Math.floor(Math.random() * (STAGE_WIDTH-this.radius*2));
-    this.y = Math.floor(Math.random() * (STAGE_HEIGHT-this.radius*2));
-
-    this.xVel = getRandom(4);
-    this.yVel = getRandom(4);
-
-    this.color = '#'+Math.floor(Math.random()*16777215).toString(16);
+    this.x = random(this.radius, STAGE_WIDTH - this.diameter);
+    this.y = random(this.radius, STAGE_HEIGHT - this.diameter);
+    this.xVel = random(1, 5) * randomNegative();
+    this.yVel = random(1, 5) * randomNegative();
+    this.color = randomHexColor();
 }
 
-Ball.prototype.update = function() {
-    if(this.x + this.radius + this.xVel > STAGE_WIDTH) {
-        this.xVel = this.xVel * -1;
+Ball.prototype.update = function () {
+    this.x += this.xVel;
+    this.y += this.yVel;
+
+    if (this.x + this.radius > STAGE_WIDTH) {
+        this.xVel = Math.abs(this.xVel) * -1;
     }
 
-    if(this.y + this.radius + this.yVel > STAGE_HEIGHT) {
-        this.yVel = this.yVel * -1;
+    if (this.y + this.radius > STAGE_HEIGHT) {
+        this.yVel = Math.abs(this.yVel) * -1;
     }
 
-    if(this.x - this.radius - this.yVel < 0) {
+    if (this.x - this.radius < 0) {
         this.xVel = Math.abs(this.xVel);
     }
 
-    if(this.y - this.radius -  this.yVel < 0) {
+    if (this.y - this.radius < 0) {
         this.yVel = Math.abs(this.yVel);
     }
-
-    this.x += this.xVel;
-    this.y += this.yVel;
 };
 
-Ball.prototype.render = function() {
+Ball.prototype.draw = function () {
     drawCircle(this.x, this.y, this.radius, this.color);
 };
 
 
 var actors = [];
-for(var i=0;i<100;i++) {
+
+for (var i = 0; i < 10; i++) {
     actors.push(new Ball());
 }
-
 
 function draw() {
     clear();
 
-    actors.forEach(function(actor) {
+    actors.forEach(function (actor) {
         actor.update();
-        actor.render();
+        actor.draw();
     });
-
 
     window.requestAnimationFrame(draw);
 }
 
-
-//setInterval(draw, 1);
+//window.setInterval(draw, 1);
 
 window.requestAnimationFrame(draw);
+
