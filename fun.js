@@ -28,10 +28,9 @@ function drawCircle(x, y, r, color) {
 
 function Ball() {
     this.radius = random(10, 50);
-    this.diameter = this.radius * 2;
 
-    this.x = random(this.radius, STAGE_WIDTH - this.diameter);
-    this.y = random(this.radius, STAGE_HEIGHT - this.diameter);
+    this.x = random(this.radius, STAGE_WIDTH - this.radius);
+    this.y = random(this.radius, STAGE_HEIGHT - this.radius);
     this.xVel = random(1, 5) * randomNegative();
     this.yVel = random(1, 5) * randomNegative();
     this.color = randomHexColor();
